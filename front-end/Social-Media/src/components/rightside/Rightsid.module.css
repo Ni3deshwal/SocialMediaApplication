@@ -1,0 +1,22 @@
+.rightsid{
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
+
+}
+.navbar{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+
+}
+.navbar>img{
+    width: 1.5rem;
+    height:1.5rem;
+    
+}
+.sharebutton{
+    height:3rem;
+    width:80%;
+    align-self: center;
+}
