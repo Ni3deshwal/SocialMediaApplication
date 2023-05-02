@@ -1,4 +1,4 @@
-
+import React from "react";
 import fc from '../followerscard/Followerscard.module.css'
 import {Followersdata} from '../../Data/Followersdata.jsx'
 

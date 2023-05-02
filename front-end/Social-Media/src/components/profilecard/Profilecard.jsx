@@ -3,6 +3,8 @@ import pc from '../profilecard/Profilecard.module.css'
 import cover from '../../img/cover.jpg'
 import profile from '../../img/profileImg.jpg'
 function Profilecard() {
+    const profilepage=true;
+
     return (
         <div className={pc.profilecard}>
             <div className={pc.profileimage}>
@@ -25,12 +27,28 @@ function Profilecard() {
                         <span> 1</span>
                         <span>Followers</span>
                     </div>
+                    {
+                        profilepage&&(
+                            <>
+                            
+                            <div className={pc.vl}>
+
+                            </div>
+                            <div className={pc.follow}>
+                                <span>3</span>
+                                <span>Posts</span>
+                            </div>
+                            
+                            </>
+                        )
+                    }
 
                 </div>
                 <hr />
 
             </div>
-            <span>My Profile</span>
+            {profilepage?'':<span>My Profile</span>}
+            
         </div>
     )
 }
