@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import auth from '../auth/Auth.module.css'
 import logo from '../../img/logo.png'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {login,signup} from '../../redux/action/AuthAction'
 
 function Auth() {
     const dispatch=useDispatch()
-    const loading=useSelector((state)=>state.AuthReducer.loading)
-    console.log(loading);
+    // const loading=useSelector((state)=>state.AuthReducer.loading)
+    // // console.log(loading);
     const [issignup, setIssignup] = useState(true);
     const [data,setData]=useState({
         firstname:"",
@@ -114,7 +114,7 @@ function Auth() {
                         <span style={{ fontSize: "12px" }} onClick={() => {setIssignup((prev) => !prev); resetForm()}}>{issignup ? "Already have an account. Login!" : "Don't have an account.Signup"}</span>
                     </div>
                     <p style={{display:confirmpassword?"none":"block",fontSize:"11px",color:"red",alignSelf:"flex-end"}}>*Password is not match.Please enter same password.</p>
-                    <button className={auth.signbutton} type='submit'>{loading?"Loading...":issignup ? "Signup" : "Login"}</button>
+                    <button className={auth.signbutton} type='submit'>{issignup ? "Signup" : "Login"}</button>
                 </form>
             </div>
             {/* Right side part end */}
