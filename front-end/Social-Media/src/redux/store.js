@@ -26,5 +26,6 @@ const composeEnhancer=window.__redux_DEVTOOLS_COMPOSE__ || compose
 const persistedstate=loadFromLocalStorage();
 const store=createStore(Reducers,persistedstate,composeEnhancer(applyMiddleware(thunk)))
 
+
 store.subscribe(()=>saveToLocalStorage(store.getState()))
 export default store;

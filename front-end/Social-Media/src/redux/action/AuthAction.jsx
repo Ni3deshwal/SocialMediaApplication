@@ -1,20 +1,26 @@
 // import * as AuthApi from '../../api/AuthRequest.jsx'
 
 export const login=(formdata)=>async(dispatch)=>{
-    dispatch({type:"AUTH_START"})
+    
     try{
+        dispatch({type:"AUTH_START"})
 
-        fetch('http://localhost:5000/auth/login',{
+        let id=await fetch('http://localhost:5000/auth/login',{
             method:"POST",
             body:JSON.stringify(formdata),
             headers:{
                 "Content-Type":"application/json"
             }
         })
+        id=await id.json()
+        const {_id,username}=id.user;
+
+        console.log(id)
         dispatch(
             {type:"AUTH_SUCCESS",
-            data:formdata
+            data:{user:{_id,username},formdata}
             })
+
     }
     catch(error){
         console.log(error)
@@ -26,13 +32,14 @@ export const signup=(formdata)=>async(dispatch)=>{
     dispatch({type:"AUTH_START"})
     try{
 
-        fetch('http://localhost:5000/auth/register',{
+        await fetch('http://localhost:5000/auth/register',{
             method:"POST",
             body:JSON.stringify(formdata),
             headers:{
                 "Content-Type":"application/json"
             }
         })
+        console.log(formdata)
         dispatch(
             {type:"AUTH_SUCCESS",
             data:formdata

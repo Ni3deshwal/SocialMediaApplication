@@ -45,6 +45,10 @@ button:hover{
   border: 2px solid var(--orange);
 
 }
+button:disabled{
+  background: #4A4EB7;
+  pointer-events: none;
+}
 ::-webkit-scrollbar{
   display:none;
 }
