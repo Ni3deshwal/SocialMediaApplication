@@ -8,9 +8,11 @@ import {UilSchedule} from '@iconscout/react-unicons'
 import {UilTimes} from '@iconscout/react-unicons'
 import { useDispatch, useSelector } from 'react-redux'
 import { uploadimage } from '../../redux/action/UploadAction'
+import { uploadpost } from '../../redux/action/UploadAction'
 
 
 function Postshare() {
+  const loading=useSelector((state)=>state.PostReducer.uploading);
   const [image,setImage]=useState(null)
   const imageRef=useRef();
   const desc=useRef();
@@ -25,6 +27,10 @@ function Postshare() {
     }
 
   }
+  const reset=()=>{
+    setImage(null);
+    desc.current.value=""
+  }
   const handleshare=(e)=>{
     e.preventDefault();
     const newPost={
@@ -34,24 +40,33 @@ function Postshare() {
     }
     if(image)
     {
-      const data=new FormData();
-      const filename=Date.now()+image.name;
-      data.append("name",filename);
-      data.append("file",image);
-      newPost.image=filename;
-      console.log(newPost)
+      const data = new FormData();
+      const fileName = Date.now() + image.name;
+      data.append("name", fileName);
+      data.append("file", image);
+      
+
+    
+      newPost.image = fileName;
+      console.log(newPost);
+      
+      
       try {
+        console.log(image)
         dispatch(uploadimage(data));
-      } catch (error) {
-        console.log(error)
+      } catch (err) {
+        console.log(err);
       }
     }
+    dispatch(uploadpost(newPost))
+    reset(); 
   }
 
 
   return (
     <div className={psh.Postshare}>
         <img src={profileimage} alt="" />
+        
         <div>
           <input type="text" placeholder="What's happening?" ref={desc} required/>
           <div className={psh.postoption}>
@@ -71,7 +86,7 @@ function Postshare() {
             <UilSchedule  />
             Schedule
           </div>
-          <button className={psh.ps_button} onClick={handleshare}>Share</button>
+          <button className={psh.ps_button} onClick={handleshare} disabled={loading}>{loading?'loading...':'Share'}</button>
           <div style={{display:"none"}}>
             <input type="file" name='myImage' ref={imageRef} onChange={handleimage} />
           </div>
@@ -83,6 +98,10 @@ function Postshare() {
           </div>
         )}
         </div>
+        
+      {/* <form action="http://localhost:5000/upload" method="post" enctype="multipart/form-data">
+      <input type="file" name="avatar" />
+      </form> */}
         
     </div>
   )

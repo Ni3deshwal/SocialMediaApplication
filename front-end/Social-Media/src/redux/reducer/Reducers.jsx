@@ -1,4 +1,4 @@
 import {combineReducers} from 'redux';
 import AuthReducer from './AuthReducer';
-
-export const Reducers=combineReducers({AuthReducer})
+import PostReducer from './PostReducer';
+export const Reducers=combineReducers({AuthReducer,PostReducer})

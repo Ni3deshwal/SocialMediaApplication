@@ -39,7 +39,6 @@ export const signup=(formdata)=>async(dispatch)=>{
                 "Content-Type":"application/json"
             }
         })
-        console.log(formdata)
         dispatch(
             {type:"AUTH_SUCCESS",
             data:formdata

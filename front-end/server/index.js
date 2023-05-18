@@ -6,6 +6,8 @@ import userRoute from './routes/userRoutes.js'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import postRoute from './routes/postroutes.js'
+import UploadRoutes from './routes/UploadRoutes.js'
+
 
 //routes
 
@@ -14,6 +16,7 @@ const app = express();
 //middleware
 app.use(bodyParser.json({ limit: '30mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
+app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 
 dotenv.config();
@@ -26,3 +29,4 @@ mongoose.connect(process.env.MONGO_DB, { useNewUrlParser: true, useUnifiedTopolo
 app.use('/auth',AuthRoute)
 app.use('/user',userRoute)
 app.use('/post',postRoute)
+app.use('/upload',UploadRoutes)
