@@ -8,7 +8,7 @@ function Profileside() {
   return (
     <div className={pr.profileside}>
         <Logoseach />
-        <Profilecard />
+        <Profilecard location='homepage' />
         <Followerscard />
     
     </div>

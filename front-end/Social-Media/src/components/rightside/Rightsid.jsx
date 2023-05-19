@@ -6,6 +6,7 @@ import {UilSetting} from '@iconscout/react-unicons'
 import comment from '../../img/comment.png'
 import Trendcard from '../trendcard/Trendcard'
 import Sharemodal from '../sharemodal/Sharemodal'
+import { Link } from 'react-router-dom'
 
 
 function Rightsid() {
@@ -13,7 +14,9 @@ function Rightsid() {
   return (
     <div className={rs.rightsid}>
         <div className={rs.navbar}>
+          <Link to={'../home'}>
             <img src={home} alt="" />
+          </Link>
             <UilSetting />
             <img src={notification} alt="" />
             <img src={comment} alt="" /> 

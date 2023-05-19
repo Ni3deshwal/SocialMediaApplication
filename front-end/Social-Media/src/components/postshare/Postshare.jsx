@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import psh from '../postshare/Postshare.module.css'
-import profileimage from '../../img/profileImg.jpg'
+// import profileimage from '../../img/profileImg.jpg'
 import {UilScenery} from '@iconscout/react-unicons'
 import {UilPlayCircle} from '@iconscout/react-unicons'
 import {UilLocationPoint} from '@iconscout/react-unicons'
@@ -18,7 +18,7 @@ function Postshare() {
   const desc=useRef();
   const dispatch=useDispatch();
   const {user}=useSelector((state)=>state.AuthReducer.authdata)
-  console.log(user);
+  const serverpublic=process.env.REACT_APP_PUBLIC_FOLDER
   const handleimage=(e)=>{
     if(e.target.files &&e.target.files[0])
     {
@@ -48,11 +48,11 @@ function Postshare() {
 
     
       newPost.image = fileName;
-      console.log(newPost);
+      
       
       
       try {
-        console.log(image)
+        
         dispatch(uploadimage(data));
       } catch (err) {
         console.log(err);
@@ -65,7 +65,7 @@ function Postshare() {
 
   return (
     <div className={psh.Postshare}>
-        <img src={profileimage} alt="" />
+        <img src={user.profilePicture? serverpublic + user.profilePicture: serverpublic +"defaultProfile.jpeg"} alt="" />
         
         <div>
           <input type="text" placeholder="What's happening?" ref={desc} required/>

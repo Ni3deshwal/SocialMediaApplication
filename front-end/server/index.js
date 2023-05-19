@@ -12,6 +12,9 @@ import UploadRoutes from './routes/UploadRoutes.js'
 //routes
 
 const app = express();
+//server images for public 
+app.use(express.static('public'))
+app.use('/images',express.static('images'))
 
 //middleware
 app.use(bodyParser.json({ limit: '30mb', extended: true }))

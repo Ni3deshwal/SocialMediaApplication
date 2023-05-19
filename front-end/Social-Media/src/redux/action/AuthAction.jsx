@@ -13,12 +13,11 @@ export const login=(formdata)=>async(dispatch)=>{
             }
         })
         id=await id.json()
-        const {_id,username}=id.user;
+        const {_id,username,firstname,lastname,followers,following}=id.user;
 
-        console.log(id)
         dispatch(
             {type:"AUTH_SUCCESS",
-            data:{user:{_id,username},formdata}
+            data:{user:{_id,username,firstname,lastname,followers,following},formdata}
             })
 
     }
@@ -32,7 +31,7 @@ export const signup=(formdata)=>async(dispatch)=>{
     dispatch({type:"AUTH_START"})
     try{
 
-        const id=await fetch('http://localhost:5000/auth/register',{
+        let id=await fetch('http://localhost:5000/auth/register',{
             method:"POST",
             body:JSON.stringify(formdata),
             headers:{
@@ -40,12 +39,11 @@ export const signup=(formdata)=>async(dispatch)=>{
             }
         })
         id=await id.json()
-        const {_id,username}=id.user;
-
-        console.log(id)
+        console.log(id.user)
+        const {_id,username,firstname,lastname,followers,following}=id.user;
         dispatch(
             {type:"AUTH_SUCCESS",
-            data:{user:{_id,username},formdata}
+            data:{user:{_id,username,firstname,lastname,followers,following},formdata}
             })
 
     }

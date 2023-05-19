@@ -10,7 +10,7 @@ function Profile() {
     <div className={pr.profile}>
       <Profileleft />
       <div className={pr.profilecenter}>
-        <Profilecard />
+        <Profilecard location="profilepage" />
         <Postside />
       </div>
       <Rightside />
