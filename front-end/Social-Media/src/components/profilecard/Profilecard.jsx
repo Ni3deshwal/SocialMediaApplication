@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 function Profilecard({location}) {
     const {user}=useSelector((state)=>state.AuthReducer.authdata)
     const posts=useSelector((state)=>state.PostReducer.posts)
-    console.log(user)
     const serverpublic=process.env.REACT_APP_PUBLIC_FOLDER
     return (
         <div className={pc.profilecard}>
