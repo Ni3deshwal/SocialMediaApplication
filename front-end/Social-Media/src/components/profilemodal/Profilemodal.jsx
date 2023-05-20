@@ -32,6 +32,7 @@ function Profilemodal({modalOpened,setModalOpened,data}) {
       const data=new FormData();
       const filename=Date.now()+ profileimage.name;
       data.append('name',filename);
+      data.append('file',profileimage)
       userdata.profilepicture=filename;
       try {
         dispatch(uploadimage(data))
@@ -46,6 +47,7 @@ function Profilemodal({modalOpened,setModalOpened,data}) {
       const data=new FormData();
       const filename=Date.now()+ coverimage.name;
       data.append('name',filename);
+      data.append('file',coverimage)
       userdata.coverpicture=filename;
       try {
         dispatch(uploadimage(data))
@@ -54,7 +56,7 @@ function Profilemodal({modalOpened,setModalOpened,data}) {
         
       }
     } 
-    dispatch( updateuser(params.id,userdata))
+    dispatch(updateuser(params.id,userdata))
     setModalOpened(false);
   }
 

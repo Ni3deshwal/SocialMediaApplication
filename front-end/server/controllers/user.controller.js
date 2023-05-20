@@ -29,7 +29,7 @@ export const getUser = async (req, res) => {
 export const updateUser = async (req, res) => {
     const id = req.params.id;
     const { _id,currentUserId, currentAdminStatus, password } = req.body;
-
+    
     if (id === _id || currentAdminStatus) {
         try {
             if (password) {
@@ -37,8 +37,9 @@ export const updateUser = async (req, res) => {
                 req.body.password = await bcrypt.hash(password, salt)
             }
             const user = await userModel.findByIdAndUpdate(id, req.body, { new: true });
-            const token=jwt.sign({username:user.username,id:user._id},process.env.JWT_SECRET,{exprireIn:'1h'})
-            res.status(200).json(user,token);
+            const token=jwt.sign({username:user.username,id:user._id},process.env.SECRET_KEY,{expiresIn:'1h'})
+        
+            res.status(200).json({user,token});
 
         } catch (error) {
             res.status(500).json(error);
@@ -91,8 +92,8 @@ export const followUser=async(req,res)=>{
             const followingUser=await userModel.findById(currentUserId);
             if(!followUser.followers.includes(currentUserId))
             {
-                await followUser.updateOne({$push:{followers:currentUserId}})
-                await followingUser.updateOne({$push:{following:id}})
+                await followUser.updateOne({$addToSet:{followers:currentUserId}})
+                await followingUser.updateOne({$addToSet:{following:id}})
                 res.status(200).json("User followed sucessfully")
             }
             else{

@@ -18,12 +18,11 @@ function Infocard() {
             if(profileuserid===user._id)
             {
                 setProfileuser(user);
-                console.log(user)
             }
             else{
                 const profileuser=await userapi.getuser(profileuserid);
                 setProfileuser(profileuser);
-                console.log(profileuser)
+                
             }
         }
         fetchprofileuser();

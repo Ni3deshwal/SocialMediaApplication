@@ -1,9 +1,11 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import AuthRoute from './routes/AuthRoutes.js'
 import userRoute from './routes/userRoutes.js'
-import dotenv from 'dotenv'
 import cors from 'cors'
 import postRoute from './routes/postroutes.js'
 import UploadRoutes from './routes/UploadRoutes.js'
@@ -22,7 +24,6 @@ app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 
-dotenv.config();
 
 mongoose.connect(process.env.MONGO_DB, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => app.listen(process.env.PORT, () => console.log(`Listening on ${process.env.PORT}`)))

@@ -12,8 +12,8 @@ function Profilecard({location}) {
     return (
         <div className={pc.profilecard}>
             <div className={pc.profileimage}>
-                <img src={user.coverPicture? serverpublic + user.coverPicture: serverpublic +"cover.jpg"} alt="cover" />
-                <img src={user.profilePicture? serverpublic + user.profilePicture: serverpublic +"defaultProfile.jpeg"} alt="profile" />
+                <img src={user.coverpicture? serverpublic + user.coverpicture: serverpublic +"cover.jpg"} alt="cover" />
+                <img src={user.profilepicture? serverpublic + user.profilepicture: serverpublic +"defaultProfile.jpeg"} alt="profile" />
             </div>
             <div className={pc.profilename}>
                 <span>{user.firstname ? user.firstname +" "+ user.lastname:"Guest"}</span>
