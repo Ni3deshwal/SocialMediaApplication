@@ -13,6 +13,7 @@ const UserSchema=mongoose.Schema({
     livesin:String,
     workat:String,
     relationship:String,
+    country:String,
     followers:[],
     following:[],
     
