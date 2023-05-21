@@ -44,7 +44,7 @@ export const getUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     const id = req.params.id;
-    const { _id,currentUserId, currentAdminStatus, password } = req.body;
+    const { _id,currentUserStatus, currentAdminStatus, password } = req.body;
     
     if (id === _id || currentAdminStatus) {
         try {
@@ -73,8 +73,8 @@ export const updateUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
     const id = req.params.id;
-    const { currentUserId, currentAdminStatus } = req.body;
-    if (currentUserId === id || currentAdminStatus) {
+    const { _id, currentAdminStatus } = req.body;
+    if (_id === id || currentAdminStatus) {
         try {
             const user = await userModel.findByIdAndDelete(id);
 
@@ -97,19 +97,21 @@ export const deleteUser = async (req, res) => {
 //follow a user
 export const followUser=async(req,res)=>{
     const id=req.params.id;   
-    const {currentUserId}=req.body;
-    if(currentUserId===id)
+    const {_id}=req.body;
+    if(_id===id)
     {
         res.status(403).json("Action Forbidden")
     }
     else{
         try {
             const followUser=await userModel.findById(id);
-            const followingUser=await userModel.findById(currentUserId);
-            if(!followUser.followers.includes(currentUserId))
+            const followingUser=await userModel.findById(_id);
+            if(!followUser.followers.includes(_id))
             {
-                await followUser.updateOne({$addToSet:{followers:currentUserId}})
-                await followingUser.updateOne({$addToSet:{following:id}})
+                await followUser.updateOne({$push:{followers:_id}})
+                await followingUser.updateOne({$push:{following:id}})
+                
+
                 res.status(200).json("User followed sucessfully")
             }
             else{
@@ -123,18 +125,18 @@ export const followUser=async(req,res)=>{
 //unfollow user
 export const unfollowUser=async(req,res)=>{
     const id=req.params.id;   
-    const {currentUserId}=req.body;
-    if(currentUserId===id)
+    const {_id}=req.body;
+    if(_id===id)
     {
         res.status(403).json("Action Forbidden")
     }
     else{
         try {
             const followUser=await userModel.findById(id);
-            const followingUser=await userModel.findById(currentUserId);
-            if(followUser.followers.includes(currentUserId))
+            const followingUser=await userModel.findById(_id);
+            if(followUser.followers.includes(_id))
             {
-                await followUser.updateOne({$pull:{followers:currentUserId}})
+                await followUser.updateOne({$pull:{followers:_id}})
                 await followingUser.updateOne({$pull:{following:id}})
                 res.status(200).json("User unfollowed sucessfully")
             }

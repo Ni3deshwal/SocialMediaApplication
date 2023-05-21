@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import fc from '../followerscard/Followerscard.module.css'
+import { followuser, unfollowuser } from '../../redux/action/UserAction'
+import {useSelector,useDispatch} from 'react-redux'
 
 function User({person}) {
     const serverpublic=process.env.REACT_APP_PUBLIC_FOLDER
+    const dispatch=useDispatch();
+    const {user}=useSelector((state)=>state.AuthReducer.authdata)
+    const [following,setFollowing]=useState(person.following.includes(user._id))
+    const handlefollow=()=>{
+      dispatch(unfollowuser(person._id,user))
+    }
     return (
         <div className={fc.follower}>
             <div>
@@ -12,7 +20,7 @@ function User({person}) {
                 <span>@{person.username}</span>
               </div>
             </div>
-            <button className={fc.fc_button} >Follow</button>
+            <button className={fc.fc_button}  onClick={handlefollow}>{following?"Follow":"Unfollow"}</button>
           </div >
   )
 }

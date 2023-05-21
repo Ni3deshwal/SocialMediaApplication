@@ -9,3 +9,11 @@ export const updateuser=(id,formdata)=>async(dispatch)=>{
         dispatch({type:'UPDATE_FAIL'})
     }
 }
+export  const followuser=(id,data)=>async(dispatch)=>{
+    dispatch({type:"FOLLOW_USER"})
+    userapi.followuser(id,data);
+}
+export const unfollowuser=(id,data)=>async(dispatch)=>{
+    dispatch({type:"UNFOLLOW_USER"})
+    userapi.unfollowuser(id,data);
+}
