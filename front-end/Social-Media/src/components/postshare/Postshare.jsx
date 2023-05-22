@@ -65,7 +65,7 @@ function Postshare() {
 
   return (
     <div className={psh.Postshare}>
-        <img src={user.profilePicture? serverpublic + user.profilePicture: serverpublic +"defaultProfile.jpeg"} alt="" style={{maxWidth:"200px",height:"100px"}}/>
+        <img src={user.profilepicture? serverpublic + user.profilepicture: serverpublic +"defaultProfile.jpeg"} alt="" style={{maxWidth:"200px",height:"100px"}}/>
         
         <div>
           <input type="text" placeholder="What's happening?" ref={desc} required/>

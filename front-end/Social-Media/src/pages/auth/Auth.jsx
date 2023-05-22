@@ -8,7 +8,7 @@ import {login,signup} from '../../redux/action/AuthAction'
 function Auth() {
     const dispatch=useDispatch()
     const loading=useSelector((state)=>state.AuthReducer.loading)
-    console.log(loading);
+    // console.log(loading);
     const [issignup, setIssignup] = useState(true);
     const [data,setData]=useState({
         firstname:"",

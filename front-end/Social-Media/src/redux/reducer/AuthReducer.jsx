@@ -6,6 +6,8 @@ const AuthReducer = (state = { authdata: null, loading: false, error: false,upda
             }
         case "AUTH_SUCCESS":
             localStorage.setItem("profile", JSON.stringify({ ...action.data }))
+            localStorage.setItem("token", JSON.stringify( action.data.token ))
+
             return { ...state, authdata: action.data, loading: false, error: false }
         case "AUTH_FAILED":
             return { ...state, loading: false, error: true }

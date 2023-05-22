@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import fc from '../followerscard/Followerscard.module.css'
-import { Followersdata } from '../../Data/Followersdata.jsx'
+// import { Followersdata } from '../../Data/Followersdata.jsx'
 import User from "../user/User";
 import {useSelector} from 'react-redux'
 import { getalluser } from "../../api/UserRequest";
@@ -13,7 +13,7 @@ function Followerscard() {
       const {data}=await getalluser()
       setPerson(data)
       
-      console.log(data)
+    
     }
     fetchpersons();
   },[])

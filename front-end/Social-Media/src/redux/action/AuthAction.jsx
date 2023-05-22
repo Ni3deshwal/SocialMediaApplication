@@ -13,11 +13,15 @@ export const login=(formdata)=>async(dispatch)=>{
             }
         })
         id=await id.json()
+        
         const {_id,username,firstname,lastname,followers,following}=id.user;
+        const token=id.token;
+    
+        
 
         dispatch(
             {type:"AUTH_SUCCESS",
-            data:{user:{_id,username,firstname,lastname,followers,following},formdata}
+            data:{user:{_id,username,firstname,lastname,followers,following},formdata,token}
             })
 
     }
