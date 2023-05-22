@@ -98,6 +98,7 @@ export const deleteUser = async (req, res) => {
 export const followUser=async(req,res)=>{
     const id=req.params.id;   
     const {_id}=req.body;
+    
     if(_id===id)
     {
         res.status(403).json("Action Forbidden")
@@ -111,10 +112,11 @@ export const followUser=async(req,res)=>{
                 await followUser.updateOne({$push:{followers:_id}})
                 await followingUser.updateOne({$push:{following:id}})
                 
-
+                
                 res.status(200).json("User followed sucessfully")
             }
             else{
+                console.log('followuser',followUser)
                 res.status(403).json("User Already Followed by you")
             }
         } catch (error) {

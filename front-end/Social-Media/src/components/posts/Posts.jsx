@@ -7,18 +7,22 @@ import Post from '../post/Post'
 
 import {useDispatch, useSelector} from 'react-redux'
 import gettimelineposts from '../../redux/action/PostAction.jsx'
+import {useParams} from 'react-router-dom'
 
 
 
 
 function Posts() {
   const dispatch=useDispatch()
+  const params=useParams();
   
   const {user}=useSelector((state)=>state.AuthReducer.authdata)
-  const {posts,loading}=useSelector((state)=>state.PostReducer)
+  let {posts,loading}=useSelector((state)=>state.PostReducer)
   useEffect(()=>{
     dispatch(gettimelineposts(user._id))
   },[])
+  if(!posts) return 'no posts'
+  if(params.id) posts.filter((post)=>post.userId===params.id)
 
   return (
     <div className={ps.posts}>
