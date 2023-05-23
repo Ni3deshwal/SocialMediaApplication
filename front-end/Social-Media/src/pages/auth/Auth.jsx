@@ -7,8 +7,9 @@ import {login,signup} from '../../redux/action/AuthAction'
 
 function Auth() {
     const dispatch=useDispatch()
-    const loading=useSelector((state)=>state.AuthReducer.loading)
-    // console.log(loading);
+    // const loading=useSelector((state)=>state.AuthReducer.loading)
+    const {loading,error}=useSelector((state)=>state.AuthReducer)
+    
     const [issignup, setIssignup] = useState(true);
     const [data,setData]=useState({
         firstname:"",
@@ -32,11 +33,17 @@ function Auth() {
             data.confirmpassword===data.password?
             dispatch(signup(data))
             :setConfirmpassword(false);
+            if(!loading && !error) alert('Signup failed')
+            else alert('Signup Success')
             
         }
         else
         {
+
             dispatch(login(data))
+            if(!loading && !error) alert('Login failed')
+            else alert('Login Success')
+
         }
     }
     const resetForm = (e)=>{
