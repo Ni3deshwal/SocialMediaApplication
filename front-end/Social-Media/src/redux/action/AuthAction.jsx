@@ -35,7 +35,7 @@ export const signup=(formdata)=>async(dispatch)=>{
     dispatch({type:"AUTH_START"})
     try{
 
-        let id=await fetch('http://localhost:5000/auth/register',{
+        let id=await fetch('http://localhost:5000//auth/register',{
             method:"POST",
             body:JSON.stringify(formdata),
             headers:{
@@ -43,11 +43,12 @@ export const signup=(formdata)=>async(dispatch)=>{
             }
         })
         id=await id.json()
-        console.log(id.user)
+        const token=id.token;
+        console.log(token)
         const {_id,username,firstname,lastname,followers,following}=id.user;
         dispatch(
             {type:"AUTH_SUCCESS",
-            data:{user:{_id,username,firstname,lastname,followers,following},formdata}
+            data:{user:{_id,username,firstname,lastname,followers,following},formdata,token}
             })
 
     }

@@ -4,7 +4,9 @@ const gettimelineposts=(id)=>async(dispatch)=>{
     try {
         const data=await postapi.gettimelineposts(id);
         
-        dispatch({type:'DATA_SUCCESS',data:data})
+        
+        dispatch({type:'DATA_SUCCESS',data:data.data})
+
     } catch (error) {
         console.log(error)
         

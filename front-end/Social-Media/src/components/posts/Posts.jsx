@@ -25,7 +25,7 @@ function Posts() {
   if(params.id) posts.filter((post)=>post.userId===params.id)
 
   return (
-    <div className={ps.posts}>
+    <div className={ps.pt}>
         { loading?'Fetching Post':
             posts.map((post,id)=>{
                 return <Post data={post} id={id} />
