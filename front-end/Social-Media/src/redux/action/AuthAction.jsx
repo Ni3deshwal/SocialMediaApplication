@@ -1,23 +1,16 @@
-// import * as AuthApi from '../../api/AuthRequest.jsx'
+import * as AuthApi from '../../api/AuthRequest.jsx'
+
 
 export const login=(formdata)=>async(dispatch)=>{
     
     try{
         dispatch({type:"AUTH_START"})
-
-        let id=await fetch('http://localhost:5000/auth/login',{
-            method:"POST",
-            body:JSON.stringify(formdata),
-            headers:{
-                "Content-Type":"application/json"
-            }
-        })
-        id=await id.json()
+        const id= await AuthApi.login(formdata);
         
-        const {_id,username,firstname,lastname,followers,following}=id.user;
-        const token=id.token;
-    
+        let user=await id.data.user
         
+        const {_id,username,firstname,lastname,followers,following}=user;
+        const token=id.data.token;
 
         dispatch(
             {type:"AUTH_SUCCESS",
@@ -35,17 +28,10 @@ export const signup=(formdata)=>async(dispatch)=>{
     dispatch({type:"AUTH_START"})
     try{
 
-        let id=await fetch('http://localhost:5000//auth/register',{
-            method:"POST",
-            body:JSON.stringify(formdata),
-            headers:{
-                "Content-Type":"application/json"
-            }
-        })
-        id=await id.json()
-        const token=id.token;
-        console.log(token)
-        const {_id,username,firstname,lastname,followers,following}=id.user;
+        let id=await AuthApi.signup(formdata);
+        let user=await id.data.user
+        const token=id.data.token;
+        const {_id,username,firstname,lastname,followers,following}=user;
         dispatch(
             {type:"AUTH_SUCCESS",
             data:{user:{_id,username,firstname,lastname,followers,following},formdata,token}
@@ -56,7 +42,7 @@ export const signup=(formdata)=>async(dispatch)=>{
         console.log(error)
         dispatch({type:"AUTH_FAILED"})
     }
-
+    
 }
 export const logout=()=>async(dispatch)=>{
     dispatch({type:'LOGOUT'})

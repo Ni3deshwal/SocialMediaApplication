@@ -33,7 +33,7 @@ function Auth() {
             data.confirmpassword===data.password?
             dispatch(signup(data))
             :setConfirmpassword(false);
-            if(!loading && !error) alert('Signup failed')
+            if(!loading && !error) return
             else alert('Signup Success')
             
         }
@@ -41,7 +41,7 @@ function Auth() {
         {
 
             dispatch(login(data))
-            if(!loading && !error) alert('Login failed')
+            if(!loading && !error) return
             else alert('Login Success')
 
         }
